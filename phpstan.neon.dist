@@ -4,3 +4,6 @@ parameters:
     - public/
     - src/
     - tests/
+
+includes:
+  - 'vendor/jangregor/phpstan-prophecy/extension.neon'

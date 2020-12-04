@@ -40,6 +40,7 @@
         "react/http": "^1.1"
     },
     "require-dev": {
+        "jangregor/phpstan-prophecy": "^0.8.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12.33",
         "phpstan/phpstan-strict-rules": "^0.12.4",
@@ -53,7 +54,8 @@
     "scripts": {
         "check": [
             "@cs",
-            "@test"
+            "@test",
+            "@analyse"
         ],
         "cs": "php-cs-fixer fix src -v --diff --dry-run",
         "cs-fix": "php-cs-fixer fix src -v --diff",
