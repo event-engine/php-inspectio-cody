@@ -1,0 +1,77 @@
+{
+    "name": "event-engine/php-inspectio-cody",
+    "description": "PHP Cody for InspectIO",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alexander Miertsch",
+            "email": "contact@prooph.de",
+            "homepage": "http://www.prooph.de"
+        },
+        {
+            "name": "Sandro Keil",
+            "email": "contact@prooph.de",
+            "homepage": "http://prooph-software.com/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/event-engine/php-inspectio-cody/issues",
+        "source": "https://github.com/event-engine/php-inspectio-cody"
+    },
+    "autoload": {
+        "psr-4": {
+            "EventEngine\\InspectioCody\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EventEngineTest\\InspectioCody\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "christoph-kluge/reactphp-http-cors-middleware": "^2.0.0",
+        "event-engine/php-inspectio-graph-cody": "dev-master",
+        "fig/http-message-util": "^1.1",
+        "open-code-modeling/php-code-generator-transformator": "^0.1.0",
+        "psr/http-message": "^1.0",
+        "react/http": "^1.1"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/phpstan": "^0.12.33",
+        "phpstan/phpstan-strict-rules": "^0.12.4",
+        "phpunit/phpunit": "^9.2.6",
+        "prooph/php-cs-fixer-config": "^0.3",
+        "roave/security-advisories": "dev-master",
+        "seregazhuk/php-watcher": "^0.5.2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "php-cs-fixer fix src -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix src -v --diff",
+        "test": "vendor/bin/phpunit",
+        "analyse": "php vendor/bin/phpstan.phar analyse --no-interaction"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+        }
+    },
+    "archive": {
+        "exclude": [
+            ".coveralls.yml",
+            ".travis.yml",
+            "build",
+            "phpunit.xml*",
+            "tests"
+        ]
+    }
+}

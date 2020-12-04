@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  # The actual client application
+  iio-ic-react-http:
+    image: prooph/php:7.4-cli-xdebug
+    volumes:
+      - .:/app
+    user: ${UID}
+    ports:
+      - 3311:8080
+    env_file:
+      - ./app.env
+    command: vendor/bin/php-watcher public/index.php
+
+#
+# [ volumes definition ]
+#
+# creates Docker volumes which can be mounted by other containers too e.g. for backup
+#

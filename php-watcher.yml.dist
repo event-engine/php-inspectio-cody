@@ -1,0 +1,9 @@
+watch:
+  - src
+  - example
+  - public
+  - codyconfig.php
+extensions:
+  - php
+ignore:
+  - tests
