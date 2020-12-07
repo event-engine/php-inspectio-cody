@@ -4,7 +4,7 @@ services:
 
   # The actual client application
   iio-ic-react-http:
-    image: prooph/php:7.4-cli-xdebug
+    image: prooph/php:7.4-cli
     volumes:
       - .:/app
     user: ${UID}
