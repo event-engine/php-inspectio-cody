@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @see       https://github.com/event-engine/php-inspectio-cody for the canonical source repository
+ * @copyright https://github.com/event-engine/php-inspectio-cody/blob/master/COPYRIGHT.md
+ * @license   https://github.com/event-engine/php-inspectio-cody/blob/master/LICENSE.md MIT License
+ */
+
 declare(strict_types=1);
 
 namespace EventEngineTest\InspectioCody\Board;
