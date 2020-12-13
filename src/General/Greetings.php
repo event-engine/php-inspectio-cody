@@ -20,7 +20,7 @@ final class Greetings
         return Response::fromCody(
             \sprintf('Hey %s, Cody here. How can I help you?', $user),
             [
-                'If you need guidance just ask me with: %/help',
+                'If you need guidance just ask me with: %c/help',
                 'background-color: rgba(251, 159, 75, 0.2)',
             ],
         );
