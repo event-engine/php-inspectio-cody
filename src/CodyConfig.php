@@ -17,6 +17,9 @@ final class CodyConfig
     public const HOOK_ON_EVENT = 'onEvent';
     public const HOOK_ON_POLICY = 'onPolicy';
     public const HOOK_ON_DOCUMENT = 'onDocument';
+    public const HOOK_ON_UI = 'onUi';
+    public const HOOK_ON_FEATURE = 'onFeature';
+    public const HOOK_ON_BOUNDED_CONTEXT = 'onBoundedContext';
 
     /**
      * @var array
