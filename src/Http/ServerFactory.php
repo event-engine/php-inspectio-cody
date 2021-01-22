@@ -12,6 +12,7 @@ namespace EventEngine\InspectioCody\Http;
 
 use EventEngine\InspectioCody\CodyConfig;
 use React\EventLoop\LoopInterface;
+use React\Http\Middleware as ReactMiddleware;
 use React\Http\Server;
 use Sikei\React\Http\Middleware\CorsMiddleware;
 
@@ -42,6 +43,9 @@ final class ServerFactory
 
         return new Server(
             $loop,
+            new ReactMiddleware\StreamingRequestMiddleware(),
+            new ReactMiddleware\LimitConcurrentRequestsMiddleware(2),
+            new ReactMiddleware\RequestBodyBufferMiddleware(), // uses post_max_size as default
             new CorsMiddleware($corsSettings),
             new Middleware\HelloWorld(),
             new Middleware\ForceJson(),
