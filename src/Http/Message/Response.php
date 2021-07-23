@@ -86,6 +86,24 @@ final class Response extends Psr7Response implements CodyResponse
         );
     }
 
+    public static function empty(): CodyResponse
+    {
+        return self::fromCody(
+            '',
+            [],
+            self::EMPTY
+        );
+    }
+
+    public static function syncRequired(): CodyResponse
+    {
+        return self::fromCody(
+            'I need to sync all elements first.',
+            ["Lean back for a moment. I'll let you know when I'm done."],
+            self::SYNC_REQUIRED
+        );
+    }
+
     public static function noJsonRequest(): CodyResponse
     {
         return self::fromCody(

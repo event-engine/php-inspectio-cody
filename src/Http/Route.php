@@ -17,6 +17,7 @@ final class Route
     public const USER_REPLIED = 'UserReplied';
     public const ELEMENT_EDITED = 'ElementEdited';
     public const CONFIRM_TEST = 'ConfirmTest';
+    public const SYNC = 'Sync';
 
     public static function fullRoute(string $route): string
     {

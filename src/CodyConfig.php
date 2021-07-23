@@ -20,6 +20,8 @@ final class CodyConfig
     public const HOOK_ON_UI = 'onUi';
     public const HOOK_ON_FEATURE = 'onFeature';
     public const HOOK_ON_BOUNDED_CONTEXT = 'onBoundedContext';
+    public const HOOK_ON_SYNC = 'onSync';
+    public const HOOK_ON_DELETE = 'onDelete';
 
     /**
      * @var array
@@ -28,10 +30,21 @@ final class CodyConfig
 
     private $context;
 
-    public function __construct($context, array $hooks)
+    /**
+     * @var callable|null
+     */
+    private $fullSyncRequired;
+
+    /**
+     * @param mixed $context Context which is provided to each hook
+     * @param array $hooks List of implemented hooks
+     * @param callable|null $fullSyncRequired Callable to indicate whether to require full sync or not (must return true or false)
+     */
+    public function __construct($context, array $hooks, callable $fullSyncRequired = null)
     {
         $this->context = $context;
         $this->hooks = $hooks;
+        $this->fullSyncRequired = $fullSyncRequired;
     }
 
     public function hasHook(string $hookName): bool
@@ -50,5 +63,15 @@ final class CodyConfig
     public function context()
     {
         return $this->context;
+    }
+
+    /**
+     * Whether or not context has nodes e.g. to decide to trigger full sync
+     *
+     * @return bool
+     */
+    public function fullSyncRequired(): bool
+    {
+        return $this->fullSyncRequired !== null ? ($this->fullSyncRequired)() : false;
     }
 }

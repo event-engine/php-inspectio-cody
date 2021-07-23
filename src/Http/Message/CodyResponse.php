@@ -18,6 +18,8 @@ interface CodyResponse extends ResponseInterface
     public const ERROR = 'Error';
     public const WARNING = 'Warning';
     public const QUESTION = 'Question';
+    public const EMPTY = 'Empty';
+    public const SYNC_REQUIRED = 'SyncRequired';
 
     /**
      * @return string|string[]
