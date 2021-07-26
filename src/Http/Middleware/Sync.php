@@ -55,6 +55,10 @@ final class Sync
 
                 $hookName = CodyConfig::HOOK_ON_SYNC;
 
+                if ($request->getMethod() === RequestMethodInterface::METHOD_PUT) {
+                    $hookName = CodyConfig::HOOK_ON_SYNC_UPDATED;
+                }
+
                 if (! $this->config->hasHook($hookName)) {
                     return Response::fromCody(
                         [
