@@ -52,6 +52,7 @@ final class ServerFactory
             new Middleware\BodyParams(),
             new Middleware\RequestSync($codyConfig),
             new Middleware\Sync($codyConfig),
+            new Middleware\SyncDeleted($codyConfig),
             new Middleware\ElementEdited($codyConfig),
             new Middleware\UserReplied(),
             new Middleware\Greeting(),

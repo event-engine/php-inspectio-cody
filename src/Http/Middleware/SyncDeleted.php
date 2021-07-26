@@ -21,14 +21,10 @@ use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class Sync
+final class SyncDeleted
 {
     public const DEFAULT_DEPTH = 512;
     private const DEFAULT_OPTIONS = \JSON_BIGINT_AS_STRING | \JSON_THROW_ON_ERROR;
-    private const SUPPORTED_METHODS = [
-        RequestMethodInterface::METHOD_POST,
-        RequestMethodInterface::METHOD_PUT,
-    ];
 
     /**
      * @var CodyConfig
@@ -42,8 +38,8 @@ final class Sync
 
     public function __invoke(ServerRequestInterface $request, callable $next): ResponseInterface
     {
-        if ($request->getUri()->getPath() === Route::fullRoute(Route::SYNC)
-            && \in_array($request->getMethod(), self::SUPPORTED_METHODS, true)
+        if ($request->getUri()->getPath() === Route::fullRoute(Route::SYNC_DELETED)
+            && $request->getMethod() === RequestMethodInterface::METHOD_POST
         ) {
             try {
                 $data = (array) \json_decode(
@@ -53,16 +49,16 @@ final class Sync
                     self::DEFAULT_OPTIONS
                 );
 
-                $hookName = CodyConfig::HOOK_ON_SYNC;
+                $hookName = CodyConfig::HOOK_ON_SYNC_DELETED;
 
                 if (! $this->config->hasHook($hookName)) {
                     return Response::fromCody(
                         [
-                            "%cI'm skipping sync because I cannot find a hook for it.",
+                            "%cI'm skipping sync deleted because I cannot find a hook for it.",
                             'color: #fb9f4b; font-weight: bold',
                         ],
                         [
-                            "%cIf you want me to handle \"sync\", add a %c{$hookName}%c hook to codyconfig.php",
+                            "%cIf you want me to handle \"sync deleted\", add a %c{$hookName}%c hook to codyconfig.php",
                             'color: #414141',
                             'background-color: rgba(251, 159, 75, 0.2)',
                             'color: #414141',

@@ -21,7 +21,7 @@ final class CodyConfig
     public const HOOK_ON_FEATURE = 'onFeature';
     public const HOOK_ON_BOUNDED_CONTEXT = 'onBoundedContext';
     public const HOOK_ON_SYNC = 'onSync';
-    public const HOOK_ON_DELETE = 'onDelete';
+    public const HOOK_ON_SYNC_DELETED = 'onSyncDeleted';
 
     /**
      * @var array
