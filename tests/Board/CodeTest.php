@@ -14,6 +14,7 @@ use EventEngine\InspectioCody\Board\Code;
 use EventEngine\InspectioCody\CodyConfig;
 use EventEngine\InspectioCody\Http\Message\CodyResponse;
 use EventEngine\InspectioGraphCody\Node;
+use EventEngineTest\InspectioCody\Mock\Context;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -30,7 +31,7 @@ final class CodeTest extends TestCase
         $node->name()->willReturn('Test');
         $node->type()->willReturn('Aggregate');
 
-        $response = Code::handleElementEdited($node->reveal(), new CodyConfig([], []));
+        $response = Code::handleElementEdited($node->reveal(), new CodyConfig(new Context(false), []));
 
         $this->assertInstanceOf(CodyResponse::class, $response);
     }

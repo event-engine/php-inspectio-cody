@@ -56,6 +56,10 @@ final class Sync
                 $hookName = CodyConfig::HOOK_ON_SYNC;
 
                 if ($request->getMethod() === RequestMethodInterface::METHOD_PUT) {
+                    // server lost in memory sync, ignore sync and wait for full new sync
+                    if ($this->config->context()->isFullSyncRequired() === true) {
+                        return Response::empty();
+                    }
                     $hookName = CodyConfig::HOOK_ON_SYNC_UPDATED;
                 }
 

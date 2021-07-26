@@ -55,7 +55,7 @@ final class ServerFactory
             new Middleware\SyncDeleted($codyConfig),
             new Middleware\ElementEdited($codyConfig),
             new Middleware\UserReplied(),
-            new Middleware\Greeting(),
+            new Middleware\Greeting($codyConfig),
             new Middleware\ConfirmTest(),
             new Middleware\FinalHandler()
         );

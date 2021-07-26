@@ -33,7 +33,7 @@ final class RequestSync
     {
         if ($request->getUri()->getPath() === Route::fullRoute(Route::ELEMENT_EDITED)
             && $request->getMethod() === RequestMethodInterface::METHOD_POST
-            && $this->config->fullSyncRequired()
+            && $this->config->context()->isFullSyncRequired()
         ) {
             return Response::syncRequired();
         }

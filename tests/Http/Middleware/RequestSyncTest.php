@@ -13,6 +13,7 @@ namespace EventEngineTest\InspectioCody\Http\Middleware;
 use EventEngine\InspectioCody\CodyConfig;
 use EventEngine\InspectioCody\Http\Middleware\RequestSync;
 use EventEngineTest\InspectioCody\BaseTestCase;
+use EventEngineTest\InspectioCody\Mock\Context;
 use Prophecy\PhpUnit\ProphecyTrait;
 use React\Http\Message\ServerRequest;
 
@@ -27,7 +28,7 @@ final class RequestSyncTest extends BaseTestCase
     {
         $request = new ServerRequest('POST', '/messages/ElementEdited', []);
 
-        $config = new CodyConfig([], [], fn () => true);
+        $config = new CodyConfig(new Context(true), []);
 
         $cut = new RequestSync($config);
 

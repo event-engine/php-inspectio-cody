@@ -42,6 +42,11 @@ final class SyncDeleted
             && $request->getMethod() === RequestMethodInterface::METHOD_POST
         ) {
             try {
+                // server lost in memory sync, ignore sync and wait for full new sync
+                if ($this->config->context()->isFullSyncRequired() === true) {
+                    return Response::empty();
+                }
+
                 $data = (array) \json_decode(
                     $request->getAttribute(BodyParams::ATTRIBUTE_RAW_BODY),
                     true,

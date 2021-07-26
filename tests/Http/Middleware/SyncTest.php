@@ -15,6 +15,7 @@ use EventEngine\InspectioCody\Http\Middleware\BodyParams;
 use EventEngine\InspectioCody\Http\Middleware\Sync;
 use EventEngine\InspectioGraphCody\Node;
 use EventEngineTest\InspectioCody\BaseTestCase;
+use EventEngineTest\InspectioCody\Mock\Context;
 use Prophecy\PhpUnit\ProphecyTrait;
 use React\Http\Message\ServerRequest;
 
@@ -33,11 +34,11 @@ final class SyncTest extends BaseTestCase
 
         $nodesReceived = 0;
 
-        $sync = function (Node $node, array $context) use (&$nodesReceived) {
+        $sync = function (Node $node, Context $context) use (&$nodesReceived) {
             $nodesReceived++;
         };
 
-        $config = new CodyConfig([], [CodyConfig::HOOK_ON_SYNC => $sync]);
+        $config = new CodyConfig(new Context(false), [CodyConfig::HOOK_ON_SYNC => $sync]);
 
         $cut = new Sync($config);
 
