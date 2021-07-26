@@ -10,16 +10,22 @@ declare(strict_types=1);
 
 namespace EventEngine\InspectioCody\Http\Middleware;
 
+use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class BodyParams
 {
+    private const SUPPORTED_METHODS = [
+        RequestMethodInterface::METHOD_POST,
+        RequestMethodInterface::METHOD_PUT,
+    ];
+
     public const ATTRIBUTE_RAW_BODY = 'rawBody';
 
     public function __invoke(ServerRequestInterface $request, callable $next): ResponseInterface
     {
-        if ($request->getMethod() === 'POST'
+        if (\in_array($request->getMethod(), self::SUPPORTED_METHODS, true)
             && $request->getUri()->getPath() !== '/'
             && false !== \strpos($request->getHeaderLine('Content-Type'), 'application/json')
         ) {
