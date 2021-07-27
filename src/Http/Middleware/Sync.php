@@ -18,6 +18,7 @@ use EventEngine\InspectioCody\Http\Message\Response;
 use EventEngine\InspectioCody\Http\Route;
 use EventEngine\InspectioGraphCody\JsonNode;
 use Fig\Http\Message\RequestMethodInterface;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -46,12 +47,7 @@ final class Sync
             && \in_array($request->getMethod(), self::SUPPORTED_METHODS, true)
         ) {
             try {
-                $data = (array) \json_decode(
-                    $request->getAttribute(BodyParams::ATTRIBUTE_RAW_BODY),
-                    true,
-                    self::DEFAULT_DEPTH,
-                    self::DEFAULT_OPTIONS
-                );
+                $data = $request->getParsedBody();
 
                 $hookName = CodyConfig::HOOK_ON_SYNC;
 
@@ -80,20 +76,17 @@ final class Sync
                 }
 
                 foreach ($data['nodes'] ?? [] as $node) {
-                    $node = JsonNode::fromArray($node);
-                    $hook = $this->config->hook($hookName);
-
                     try {
+                        $node = JsonNode::fromArray($node);
+                        $hook = $this->config->hook($hookName);
                         $hook($node, $this->config->context());
                     } catch (CodyQuestion $e) {
                         return $e->response();
-                    } catch (CodyError $e) {
-                        return $e->response();
-                    } catch (\Throwable $e) {
-                        return Response::fromException($node, $e);
+                    } catch (CodyError | JsonException | \Throwable $e) {
+                        // ignore all errors on sync
+                        continue;
                     }
                 }
-
                 return Response::empty();
             } catch (\Throwable $e) {
                 return CodyError::withError($e->getMessage(), [(string) $e])->response();

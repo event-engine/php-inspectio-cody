@@ -18,6 +18,7 @@ use EventEngine\InspectioCody\Http\Message\Response;
 use EventEngine\InspectioCody\Http\Route;
 use EventEngine\InspectioGraphCody\JsonNode;
 use Fig\Http\Message\RequestMethodInterface;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -47,12 +48,7 @@ final class SyncDeleted
                     return Response::empty();
                 }
 
-                $data = (array) \json_decode(
-                    $request->getAttribute(BodyParams::ATTRIBUTE_RAW_BODY),
-                    true,
-                    self::DEFAULT_DEPTH,
-                    self::DEFAULT_OPTIONS
-                );
+                $data = $request->getParsedBody();
 
                 $hookName = CodyConfig::HOOK_ON_SYNC_DELETED;
 
@@ -73,17 +69,15 @@ final class SyncDeleted
                 }
 
                 foreach ($data['nodes'] ?? [] as $node) {
-                    $node = JsonNode::fromArray($node);
-                    $hook = $this->config->hook($hookName);
-
                     try {
+                        $node = JsonNode::fromArray($node);
+                        $hook = $this->config->hook($hookName);
                         $hook($node, $this->config->context());
                     } catch (CodyQuestion $e) {
                         return $e->response();
-                    } catch (CodyError $e) {
-                        return $e->response();
-                    } catch (\Throwable $e) {
-                        return Response::fromException($node, $e);
+                    } catch (CodyError | JsonException | \Throwable $e) {
+                        // ignore all errors on sync
+                        continue;
                     }
                 }
 
