@@ -50,9 +50,12 @@ final class ServerFactory
             new Middleware\HelloWorld(),
             new Middleware\ForceJson(),
             new Middleware\BodyParams(),
+            new Middleware\RequestSync($codyConfig),
+            new Middleware\Sync($codyConfig),
+            new Middleware\SyncDeleted($codyConfig),
             new Middleware\ElementEdited($codyConfig),
             new Middleware\UserReplied(),
-            new Middleware\Greeting(),
+            new Middleware\Greeting($codyConfig),
             new Middleware\ConfirmTest(),
             new Middleware\FinalHandler()
         );

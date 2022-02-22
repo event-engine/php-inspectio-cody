@@ -10,7 +10,18 @@ declare(strict_types=1);
 
 use EventEngine\InspectioCody\CodyConfig;
 
-$context = new stdClass(); // replace it with your own context class
+$context = new class() implements \EventEngine\InspectioCody\CodyContext {
+    public function isFullSyncRequired(): bool
+    {
+        // TODO: Implement isFullSyncRequired() method.
+        return false;
+    }
+
+    public function clearGraph(): void
+    {
+        // TODO: Implement clearGraph() method.
+    }
+}; // replace it with your own context class
 
 return new CodyConfig(
     $context,
@@ -20,5 +31,14 @@ return new CodyConfig(
 //        CodyConfig::HOOK_ON_EVENT => new EventHook(),
 //        CodyConfig::HOOK_ON_POLICY => new PolicyHook(),
 //        CodyConfig::HOOK_ON_DOCUMENT => new DocumentHook(),
+//        CodyConfig::HOOK_ON_EXTERNAL_SYSTEM => new ExternalSystemHook(),
+//        CodyConfig::HOOK_ON_HOT_SPOT => new HotSpotHook(),
+//        CodyConfig::HOOK_ON_ROLE => new RoleHook(),
+//        CodyConfig::HOOK_ON_UI => new UiHook(),
+//        CodyConfig::HOOK_ON_FEATURE => new FeatureHook(),
+//        CodyConfig::HOOK_ON_BOUNDED_CONTEXT => new BoundedContextHook(),
+//        CodyConfig::HOOK_ON_SYNC => new SyncHook(),
+//        CodyConfig::HOOK_ON_SYNC_UPDATED => new SyncHook(),
+//        CodyConfig::HOOK_ON_SYNC_DELETED => new SyncDeletedHook(),
     ]
 );
