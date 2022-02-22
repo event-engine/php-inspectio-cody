@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace EventEngineTest\InspectioCody\Http\Middleware;
 
 use EventEngine\InspectioCody\CodyConfig;
-use EventEngine\InspectioCody\Http\Middleware\BodyParams;
 use EventEngine\InspectioCody\Http\Middleware\Sync;
 use EventEngine\InspectioGraphCody\Node;
 use EventEngineTest\InspectioCody\BaseTestCase;
@@ -30,7 +29,7 @@ final class SyncTest extends BaseTestCase
     {
         $body = \file_get_contents(self::FILES_DIR . 'sync.json');
         $request = new ServerRequest('POST', '/messages/Sync', [], $body);
-        $request = $request->withAttribute(BodyParams::ATTRIBUTE_RAW_BODY, $body);
+        $request = $request->withParsedBody(\json_decode($body, true, 512, JSON_THROW_ON_ERROR));
 
         $nodesReceived = 0;
 

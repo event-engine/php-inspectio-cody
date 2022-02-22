@@ -25,7 +25,9 @@ use Psr\Http\Message\ServerRequestInterface;
 final class Sync
 {
     public const DEFAULT_DEPTH = 512;
+
     private const DEFAULT_OPTIONS = \JSON_BIGINT_AS_STRING | \JSON_THROW_ON_ERROR;
+
     private const SUPPORTED_METHODS = [
         RequestMethodInterface::METHOD_POST,
         RequestMethodInterface::METHOD_PUT,
@@ -87,6 +89,7 @@ final class Sync
                         continue;
                     }
                 }
+
                 return Response::empty();
             } catch (\Throwable $e) {
                 return CodyError::withError($e->getMessage(), [(string) $e])->response();

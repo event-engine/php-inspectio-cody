@@ -33,7 +33,7 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "christoph-kluge/reactphp-http-cors-middleware": "^2.0.0",
-        "event-engine/php-inspectio-graph-cody": "dev-feature/simplify-connections",
+        "event-engine/php-inspectio-graph-cody": "^0.1.0",
         "fig/http-message-util": "^1.1",
         "open-code-modeling/php-code-generator-transformator": "^0.1.0",
         "psr/http-message": "^1.0",
@@ -46,8 +46,8 @@
         "phpstan/phpstan": "^0.12.33",
         "phpstan/phpstan-strict-rules": "^0.12.4",
         "phpunit/phpunit": "^9.2.6",
-        "prooph/php-cs-fixer-config": "^0.4",
-        "roave/security-advisories": "dev-master"
+        "prooph/php-cs-fixer-config": "^0.5.0",
+        "roave/security-advisories": "dev-latest"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

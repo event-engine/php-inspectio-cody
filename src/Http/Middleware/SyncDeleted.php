@@ -25,6 +25,7 @@ use Psr\Http\Message\ServerRequestInterface;
 final class SyncDeleted
 {
     public const DEFAULT_DEPTH = 512;
+
     private const DEFAULT_OPTIONS = \JSON_BIGINT_AS_STRING | \JSON_THROW_ON_ERROR;
 
     /**

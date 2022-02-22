@@ -13,18 +13,31 @@ namespace EventEngine\InspectioCody;
 final class CodyConfig
 {
     public const HOOK_ON_COMMAND = 'onCommand';
+
     public const HOOK_ON_AGGREGATE = 'onAggregate';
+
     public const HOOK_ON_EVENT = 'onEvent';
+
     public const HOOK_ON_POLICY = 'onPolicy';
+
     public const HOOK_ON_DOCUMENT = 'onDocument';
+
     public const HOOK_ON_EXTERNAL_SYSTEM = 'onExternalSystem';
+
     public const HOOK_ON_HOT_SPOT = 'onHotSpot';
+
     public const HOOK_ON_ROLE = 'onRole';
+
     public const HOOK_ON_UI = 'onUi';
+
     public const HOOK_ON_FEATURE = 'onFeature';
+
     public const HOOK_ON_BOUNDED_CONTEXT = 'onBoundedContext';
+
     public const HOOK_ON_SYNC = 'onSync';
+
     public const HOOK_ON_SYNC_UPDATED = 'onSyncUpdated';
+
     public const HOOK_ON_SYNC_DELETED = 'onSyncDeleted';
 
     /**
